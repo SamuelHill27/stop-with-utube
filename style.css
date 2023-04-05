@@ -34,7 +34,7 @@ textarea {
 }
 
 .container {
-    /* border-style: solid; */
+    border-style: none;
 }
 
 .container .lists {
