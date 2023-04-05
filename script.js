@@ -1,7 +1,9 @@
 window.onload = function () {
     let texts = document.getElementsByTagName('TEXTAREA');
     for (let elem of texts) {
-        elem.addEventListener('change', getDB([Number(elem.id.slice(-1)), elem.value]));
+        //elem.addEventListener('oninput', getDB([Number(elem.id.slice(-1)), elem.value]));
+        //console.log(getDB("changed"));
+        elem.addEventListener('input', function () { getDB([Number(elem.id.slice(-1)), elem.value]) });
     }
 }
 
