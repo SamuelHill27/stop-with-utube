@@ -30,7 +30,7 @@
                 echo json_encode(updateData($data[0], $data[1], $mysqli));
             }
 
-            $mysqli -> close();
+            $mysqli->close();
         }
     }
 
@@ -62,10 +62,12 @@
 
         // upon successfull execution, return success message
         if ($stmt->execute()) {
-            return [$id, $text];
-        } else {
-            return null;
+            if ($mysqli->affected_rows != 0) {
+                return [$id, $text];
+            }
         }
+
+        return null;
     }
 
 ?>

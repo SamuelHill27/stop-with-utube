@@ -4,11 +4,15 @@ window.onload = function () {
 
     for (let elem of texts) {
         elem.value = getDB([Number(elem.id.slice(-1))]); // converts last char from textarea id to int where textareas text is then set to text in database with specific id
+        if (!elem.value) {
+            alert("Error: Unable to get data. Please contact Sam");
+        }
+
         elem.addEventListener('input', function () { 
             toSend = [Number(this.id.slice(-1)), this.value]; // creating array with id and text of textarea
             toSend = encodeURIComponent(JSON.stringify(toSend)); // putting array into form more easily readable by php
             if (!getDB(toSend)) {
-                alert("error - null received from php");
+                alert("Error: Unable to update. Please contact Sam");
             }
         });
     }
