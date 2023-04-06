@@ -36,7 +36,7 @@
 
     // gets value in text column from table
     function getData($id, $mysqli) {
-        $query = "SELECT `text` FROM `motivations` WHERE `id` = ?";
+        $query = "SELECT `text` FROM `motivationsAl` WHERE `id` = ?";
 
         // bind values to query safely
         $stmt = $mysqli->prepare($query);
@@ -54,7 +54,7 @@
 
     // updates value in text column from table
     function updateData($id, $text, $mysqli) {
-        $query = "UPDATE `motivations` SET `text` = ? WHERE `id` = ?";
+        $query = "UPDATE `motivationsAl` SET `text` = ? WHERE `id` = ?";
 
         // bind values to query safely
         $stmt = $mysqli->prepare($query);
