@@ -1,24 +1,26 @@
 window.onload = function () {
     let texts = document.getElementsByTagName('TEXTAREA');
+    let toSend;
+
     for (let elem of texts) {
-        //elem.addEventListener('oninput', getDB([Number(elem.id.slice(-1)), elem.value]));
-        //console.log(getDB("changed"));
-        elem.addEventListener('input', function () { getDB([Number(elem.id.slice(-1)), elem.value]) });
+        elem.value = getDB([Number(elem.id.slice(-1))]); // converts last char from textarea id to int where textareas text is then set to text in database with specific id
+        elem.addEventListener('input', function () { 
+            toSend = [Number(this.id.slice(-1)), this.value]; // creating array with id and text of textarea
+            toSend = encodeURIComponent(JSON.stringify(toSend)); // putting array into form more easily readable by php
+            if (!getDB(toSend)) {
+                alert("error - null received from php");
+            }
+        });
     }
 }
 
 // ajax call responsible for requesting database results as obj using search data
 // returns object of database rows
 function getDB(toSend) {
-    console.log(toSend);
-
     let response;
 
     const xhttp = new XMLHttpRequest();
-    xhttp.onload = function () {
-        //document.getElementById("test").innerHTML = this.responseText;
-        response = JSON.parse(this.responseText);
-    }
+    xhttp.onload = function () { response = JSON.parse(this.responseText) }
     xhttp.open("GET", "update.php?q=" + toSend, false);
     xhttp.send();
 
